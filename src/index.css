@@ -102,7 +102,7 @@
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-sans font-medium tracking-tight text-white;
+    @apply font-sans font-medium tracking-tight text-text-primary;
   }
   
   body.platform-ios h1, body.platform-ios h2, body.platform-ios h3, body.platform-ios h4, body.platform-ios h5, body.platform-ios h6 {

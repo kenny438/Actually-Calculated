@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Course } from "../data/mockData";
 import { formatCurrency, cn } from "../lib/utils";
-import { ArrowLeft, Share2, Star, Clock, Users, PlayCircle, CheckCircle, Lock, Check, GraduationCap, Edit2, Sparkles, BadgeCheck, ChevronDown, ChevronUp, Globe, Award, HelpCircle, MessageSquare, Info, Target, Zap, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, Share2, Star, Clock, Users, PlayCircle, CheckCircle, Lock, Check, GraduationCap, Edit2, Sparkles, BadgeCheck, ChevronDown, ChevronUp, Globe, Award, HelpCircle, MessageSquare, Info, Target, Zap, ArrowUpRight, Map as MapIcon } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useToast } from "./ui/Toast";
 import { CommentSection } from "./CommentSection";
@@ -103,6 +103,10 @@ export function CourseDetail({ course, onBack, onEnroll, isWatchlisted, onToggle
     { id: "about", label: "About", icon: Info },
     { id: "outcomes", label: "Outcomes", icon: Target },
     { id: "courses", label: "Curriculum", icon: PlayCircle },
+    ...(isEnrolled ? [
+      { id: "map", label: "Learning Map", icon: MapIcon },
+      { id: "questions", label: "Q&A", icon: HelpCircle },
+    ] : []),
     { id: "testimonials", label: "Testimonials", icon: MessageSquare },
   ];
 
@@ -419,20 +423,153 @@ export function CourseDetail({ course, onBack, onEnroll, isWatchlisted, onToggle
                               {lesson.description && (
                                 <p className="text-sm text-text-secondary mt-1 line-clamp-2">{lesson.description}</p>
                               )}
-                              <p className="text-sm text-text-secondary flex items-center gap-2 mt-2">
-                                <Clock className="w-4 h-4" /> {lesson.duration}
+                              <p className="text-sm text-text-secondary flex items-center gap-4 mt-2">
+                                <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" /> {lesson.duration}</span>
+                                {lesson.questions && lesson.questions.length > 0 && (
+                                  <span className="flex items-center gap-1.5"><HelpCircle className="w-4 h-4" /> {lesson.questions.length} Questions</span>
+                                )}
                               </p>
                             </div>
                           </div>
-                          {(!isEnrolled && !isInstructor && index > 0) ? (
-                            <Lock className="w-5 h-5 text-text-secondary" />
-                          ) : (
-                            <ChevronDown className="w-5 h-5 text-text-secondary" />
-                          )}
+                          <div className="flex items-center gap-4">
+                            {completedLessons.has(lesson.id) && (
+                              <BadgeCheck className="w-6 h-6 text-green-500" />
+                            )}
+                            {(!isEnrolled && !isInstructor && index > 0) ? (
+                              <Lock className="w-5 h-5 text-text-secondary" />
+                            ) : (
+                              <ChevronDown className="w-5 h-5 text-text-secondary" />
+                            )}
+                          </div>
                         </button>
                       </div>
                     ))}
                   </div>
+                </motion.div>
+              )}
+
+              {activeTab === "map" && (
+                <motion.div 
+                  key="map"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="space-y-12"
+                >
+                  <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-3xl font-bold text-text-primary">Your Learning Journey</h2>
+                    <div className="flex items-center gap-2 px-4 py-2 bg-bg-tertiary rounded-full border border-border-secondary">
+                      <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                      <span className="text-xs font-bold text-text-primary uppercase tracking-widest">{progress}% Complete</span>
+                    </div>
+                  </div>
+
+                  <div className="bg-bg-secondary p-12 rounded-[3rem] border border-border-primary relative overflow-hidden min-h-[600px]">
+                    <div className="relative py-8 max-w-2xl mx-auto">
+                      {/* Winding Path Line */}
+                      <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
+                        <path 
+                          d="M 100,0 Q 100,150 300,150 T 500,300 T 300,450 T 100,600" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          strokeWidth="4"
+                          strokeDasharray="8 8"
+                          className="text-border-primary opacity-30"
+                        />
+                      </svg>
+
+                      <div className="relative z-10 space-y-24">
+                        {course.lessons.map((lesson, index) => {
+                          const isCompleted = completedLessons.has(lesson.id);
+                          const isActive = !isCompleted && (index === 0 || completedLessons.has(course.lessons[index-1].id));
+                          const isLocked = !isCompleted && !isActive;
+                          
+                          // Alternate sides for the winding path effect
+                          const isLeft = index % 2 === 0;
+                          
+                          return (
+                            <div key={lesson.id} className={cn(
+                              "flex items-center gap-8",
+                              isLeft ? "flex-row" : "flex-row-reverse"
+                            )}>
+                              {/* Node */}
+                              <button 
+                                onClick={() => !isLocked && setActiveLessonId(lesson.id)}
+                                className={cn(
+                                  "w-16 h-16 flex items-center justify-center rounded-full border-4 relative z-10 transition-all duration-500 shadow-xl",
+                                  isCompleted ? "bg-green-500 border-green-200 text-white" : 
+                                  isActive ? "bg-bg-inverted border-bg-inverted-hover text-text-inverted scale-110 ring-4 ring-bg-inverted/20" : 
+                                  "bg-bg-tertiary border-border-secondary text-text-secondary grayscale opacity-50"
+                                )}
+                              >
+                                {isCompleted ? <Check className="w-8 h-8" /> : <span className="text-xl font-bold">{index + 1}</span>}
+                                {isActive && (
+                                  <motion.div 
+                                    layoutId="active-pointer"
+                                    className="absolute -top-12 bg-bg-inverted text-text-inverted px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-widest whitespace-nowrap"
+                                    initial={{ y: 10, opacity: 0 }}
+                                    animate={{ y: 0, opacity: 1 }}
+                                  >
+                                    Current Lesson
+                                    <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-bg-inverted rotate-45" />
+                                  </motion.div>
+                                )}
+                              </button>
+
+                              {/* Content Card */}
+                              <div 
+                                className={cn(
+                                  "flex-1 max-w-sm bg-bg-primary p-6 rounded-2xl border transition-all duration-300",
+                                  isLocked ? "border-border-primary opacity-50" : "border-border-secondary hover:border-bg-inverted hover:shadow-lg cursor-pointer",
+                                  isLeft ? "text-left" : "text-right"
+                                )}
+                                onClick={() => !isLocked && setActiveLessonId(lesson.id)}
+                              >
+                                <div className="flex items-center gap-2 mb-2 justify-end flex-row-reverse">
+                                  <h3 className="text-lg font-bold text-text-primary">{lesson.title}</h3>
+                                  {isLocked && <Lock className="w-4 h-4 text-text-secondary" />}
+                                </div>
+                                <p className="text-sm text-text-secondary line-clamp-2">{lesson.description}</p>
+                                <div className={cn("flex items-center gap-4 mt-4", isLeft ? "justify-start" : "justify-end")}>
+                                  <span className="text-xs font-bold text-text-secondary uppercase tracking-widest flex items-center gap-1">
+                                    <Clock className="w-3 h-3" /> {lesson.duration}
+                                  </span>
+                                  {isCompleted && (
+                                    <span className="text-xs font-bold text-green-500 uppercase tracking-widest">Completed</span>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {activeTab === "questions" && (
+                <motion.div 
+                  key="questions"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="space-y-8"
+                >
+                  <div className="flex items-center justify-between mb-6">
+                    <div>
+                      <h2 className="text-3xl font-bold text-text-primary">Course Q&A</h2>
+                      <p className="text-text-secondary mt-2">Ask questions and get help from instructors and other students.</p>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <div className="text-right">
+                        <p className="text-2xl font-bold text-text-primary">{course.comments.length}</p>
+                        <p className="text-[10px] font-bold text-text-secondary uppercase tracking-widest">Total Questions</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <CommentSection comments={course.comments} courseId={course.id} />
                 </motion.div>
               )}
 
@@ -546,10 +683,29 @@ export function CourseDetail({ course, onBack, onEnroll, isWatchlisted, onToggle
                 </div>
               </div>
 
-              {!isEnrolled && (
+              {isEnrolled ? (
                 <div className="mt-12 space-y-4">
                   <button 
-                    onClick={() => onEnroll(course.id)}
+                    onClick={() => {
+                      const nextLesson = course.lessons.find(l => !completedLessons.has(l.id)) || course.lessons[0];
+                      setActiveLessonId(nextLesson.id);
+                    }}
+                    className="w-full py-4 bg-bg-inverted text-text-inverted font-bold rounded-xl hover:bg-bg-inverted-hover transition-all shadow-lg shadow-bg-inverted/20 flex items-center justify-center gap-2"
+                  >
+                    <PlayCircle className="w-5 h-5" />
+                    {progress > 0 ? "Continue Learning" : "Start Learning"}
+                  </button>
+                  <p className="text-[10px] text-center text-text-secondary font-bold uppercase tracking-widest">
+                    Your progress: {progress}% complete
+                  </p>
+                </div>
+              ) : (
+                <div className="mt-12 space-y-4">
+                  <button 
+                    onClick={() => {
+                      onEnroll(course.id);
+                      setActiveTab("map");
+                    }}
                     className="w-full py-4 bg-bg-inverted text-text-inverted font-bold rounded-xl hover:bg-bg-inverted-hover transition-all shadow-lg shadow-bg-inverted/20"
                   >
                     Enroll Now

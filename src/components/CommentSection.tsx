@@ -87,7 +87,7 @@ export function CommentSection({ comments: initialComments, courseId }: CommentS
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
               placeholder="Ask a question or share your thoughts..."
-              className="w-full pl-4 pr-12 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-[#EDEDED] focus:border-[#EDEDED] transition-all outline-none text-text-primary placeholder-text-muted text-sm"
+              className="w-full pl-4 pr-12 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-border-hover focus:border-border-hover transition-all outline-none text-text-primary placeholder-text-muted text-sm"
             />
             <button 
               type="submit"
@@ -116,7 +116,7 @@ export function CommentSection({ comments: initialComments, courseId }: CommentS
               key={comment.id} 
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="flex gap-4 group bg-bg-primary p-4 rounded-md border border-border-secondary hover:border-[#666] transition-colors"
+              className="flex gap-4 group bg-bg-primary p-4 rounded-md border border-border-secondary hover:border-border-hover transition-colors"
             >
               <img 
                 src={comment.avatarUrl || "https://api.dicebear.com/7.x/avataaars/svg?seed=" + comment.avatarSeed}

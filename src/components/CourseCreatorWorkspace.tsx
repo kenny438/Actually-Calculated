@@ -349,7 +349,7 @@ export function CourseCreatorWorkspace({ onClose, onSave, onDelete, initialData,
                             value={courseData.title}
                             onChange={e => setCourseData({ ...courseData, title: e.target.value })}
                             placeholder="e.g. Advanced Mathematics"
-                            className="w-full px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-[#EDEDED] focus:border-[#EDEDED] transition-all outline-none text-text-primary placeholder-text-muted font-medium"
+                            className="w-full px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-border-hover focus:border-border-hover transition-all outline-none text-text-primary placeholder-text-muted font-medium"
                           />
                         </div>
                         
@@ -360,7 +360,7 @@ export function CourseCreatorWorkspace({ onClose, onSave, onDelete, initialData,
                             onChange={e => setCourseData({ ...courseData, description: e.target.value })}
                             placeholder="What will students learn?"
                             rows={4}
-                            className="w-full px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-[#EDEDED] focus:border-[#EDEDED] transition-all outline-none text-text-primary placeholder-text-muted font-medium resize-none"
+                            className="w-full px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-border-hover focus:border-border-hover transition-all outline-none text-text-primary placeholder-text-muted font-medium resize-none"
                           />
                         </div>
 
@@ -370,7 +370,7 @@ export function CourseCreatorWorkspace({ onClose, onSave, onDelete, initialData,
                             <select
                               value={courseData.category}
                               onChange={e => setCourseData({ ...courseData, category: e.target.value as any })}
-                              className="w-full px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-[#EDEDED] focus:border-[#EDEDED] transition-all outline-none text-text-primary font-medium"
+                              className="w-full px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-border-hover focus:border-border-hover transition-all outline-none text-text-primary font-medium"
                             >
                               <option>Technology</option>
                               <option>Business</option>
@@ -384,7 +384,7 @@ export function CourseCreatorWorkspace({ onClose, onSave, onDelete, initialData,
                             <select
                               value={courseData.level}
                               onChange={e => setCourseData({ ...courseData, level: e.target.value as any })}
-                              className="w-full px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-[#EDEDED] focus:border-[#EDEDED] transition-all outline-none text-text-primary font-medium"
+                              className="w-full px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-border-hover focus:border-border-hover transition-all outline-none text-text-primary font-medium"
                             >
                               <option>Beginner</option>
                               <option>Intermediate</option>
@@ -400,20 +400,20 @@ export function CourseCreatorWorkspace({ onClose, onSave, onDelete, initialData,
                             value={courseData.tags?.join(", ") || ""}
                             onChange={e => setCourseData({ ...courseData, tags: e.target.value.split(",").map(t => t.trim()).filter(Boolean) })}
                             placeholder="e.g. React, JavaScript, Frontend (comma separated)"
-                            className="w-full px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-[#EDEDED] focus:border-[#EDEDED] transition-all outline-none text-text-primary placeholder-text-muted font-medium"
+                            className="w-full px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-border-hover focus:border-border-hover transition-all outline-none text-text-primary placeholder-text-muted font-medium"
                           />
                         </div>
 
                         <div>
                           <label className="block text-sm font-medium text-text-primary mb-2">Cover Image</label>
                           {!courseData.image ? (
-                            <div className="mt-2 flex justify-center border border-dashed border-border-secondary rounded-md px-6 py-12 hover:border-[#666] hover:bg-[#1A1A1A] transition-colors cursor-pointer group bg-bg-primary">
+                            <div className="mt-2 flex justify-center border border-dashed border-border-secondary rounded-md px-6 py-12 hover:border-border-hover hover:bg-bg-tertiary transition-colors cursor-pointer group bg-bg-primary">
                               <div className="text-center">
                                 <ImageIcon className="mx-auto h-10 w-10 text-text-muted group-hover:text-text-primary transition-colors" aria-hidden="true" />
                                 <div className="mt-4 flex text-sm leading-6 text-text-secondary justify-center">
                                   <label
                                     htmlFor="file-upload"
-                                    className="relative cursor-pointer font-medium text-text-primary focus-within:outline-none hover:text-white"
+                                    className="relative cursor-pointer font-medium text-text-primary focus-within:outline-none hover:text-text-primary"
                                   >
                                     <span>Upload a file</span>
                                     <input id="file-upload" name="file-upload" type="file" accept="image/*" className="sr-only" onChange={(e) => {
@@ -435,7 +435,7 @@ export function CourseCreatorWorkspace({ onClose, onSave, onDelete, initialData,
                           ) : (
                             <div className="relative mt-2 overflow-hidden rounded-md border border-border-secondary h-64 bg-bg-primary group">
                               <img src={courseData.image} alt="Preview" className="w-full h-full object-cover opacity-80" />
-                              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                              <div className="absolute inset-0 bg-bg-primary/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                 <button 
                                   onClick={() => setCourseData({ ...courseData, image: "" })}
                                   className="px-4 py-2 bg-bg-secondary border border-border-secondary text-text-primary hover:bg-bg-tertiary font-medium rounded-md transition-colors text-sm"
@@ -451,7 +451,7 @@ export function CourseCreatorWorkspace({ onClose, onSave, onDelete, initialData,
                               value={courseData.image}
                               onChange={e => setCourseData({ ...courseData, image: e.target.value })}
                               placeholder="Or paste an image URL here..."
-                              className="flex-1 px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-[#EDEDED] focus:border-[#EDEDED] transition-all outline-none text-text-primary placeholder-text-muted text-sm font-medium"
+                              className="flex-1 px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-border-hover focus:border-border-hover transition-all outline-none text-text-primary placeholder-text-muted text-sm font-medium"
                             />
                           </div>
                         </div>
@@ -527,7 +527,7 @@ export function CourseCreatorWorkspace({ onClose, onSave, onDelete, initialData,
                               setTimeout(() => toast.remove(), 500);
                             }, 3000);
                           }}
-                          className="w-full py-2 bg-bg-tertiary text-text-primary hover:bg-[#333] font-medium rounded-md transition-colors text-sm border border-border-secondary"
+                          className="w-full py-2 bg-bg-tertiary text-text-primary hover:bg-bg-tertiary/80 font-medium rounded-md transition-colors text-sm border border-border-secondary"
                         >
                           Read Creator Guide
                         </button>
@@ -563,9 +563,9 @@ export function CourseCreatorWorkspace({ onClose, onSave, onDelete, initialData,
                         <path 
                           d="M 50,0 Q 50,100 200,100 T 350,200 T 200,300 T 50,400" 
                           fill="none" 
-                          stroke="#333" 
+                          stroke="currentColor" 
                           strokeWidth="2"
-                          className="path-line"
+                          className="path-line text-border-primary"
                         />
                       </svg>
 
@@ -583,7 +583,7 @@ export function CourseCreatorWorkspace({ onClose, onSave, onDelete, initialData,
                               <div className="relative group cursor-pointer" onClick={() => setActiveMenu(lesson.id)}>
                                 <div className={cn(
                                   "w-12 h-12 flex items-center justify-center rounded-full border-2 relative z-10 transition-all duration-300 group-hover:scale-105",
-                                  "bg-bg-secondary border-[#EDEDED] text-text-primary"
+                                  "bg-bg-secondary border-border-secondary text-text-primary"
                                 )}>
                                   <span className="text-base font-semibold">{index + 1}</span>
                                 </div>
@@ -592,12 +592,12 @@ export function CourseCreatorWorkspace({ onClose, onSave, onDelete, initialData,
                               {/* Content Card */}
                               <div 
                                 className={cn(
-                                  "flex-1 max-w-sm bg-bg-primary p-4 rounded-md border border-border-secondary cursor-pointer hover:border-[#666] transition-all group",
+                                  "flex-1 max-w-sm bg-bg-primary p-4 rounded-md border border-border-secondary cursor-pointer hover:border-border-hover transition-all group",
                                   isLeft ? "text-left" : "text-right"
                                 )}
                                 onClick={() => setActiveMenu(lesson.id)}
                               >
-                                <h3 className="text-base font-semibold text-text-primary mb-2 group-hover:text-white transition-colors">
+                                <h3 className="text-base font-semibold text-text-primary mb-2 group-hover:text-text-secondary transition-colors">
                                   {lesson.title}
                                 </h3>
                                 <div className={cn(
@@ -677,7 +677,7 @@ export function CourseCreatorWorkspace({ onClose, onSave, onDelete, initialData,
                                 setCourseData({ ...courseData, outcomes: next });
                               }}
                               placeholder="e.g. Master React 19's new features"
-                              className="flex-1 px-4 py-2 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-[#EDEDED] outline-none text-sm"
+                              className="flex-1 px-4 py-2 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-border-hover outline-none text-sm"
                             />
                             <button 
                               onClick={() => setCourseData(prev => ({ ...prev, outcomes: prev.outcomes?.filter((_, idx) => idx !== i) }))}
@@ -698,7 +698,7 @@ export function CourseCreatorWorkspace({ onClose, onSave, onDelete, initialData,
                         value={courseData.skills?.join(", ") || ""}
                         onChange={e => setCourseData({ ...courseData, skills: e.target.value.split(",").map(s => s.trim()).filter(Boolean) })}
                         placeholder="e.g. React, Next.js, TypeScript"
-                        className="w-full px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-[#EDEDED] outline-none text-sm"
+                        className="w-full px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-border-hover outline-none text-sm"
                       />
                     </div>
 
@@ -710,7 +710,7 @@ export function CourseCreatorWorkspace({ onClose, onSave, onDelete, initialData,
                         value={courseData.tools?.join(", ") || ""}
                         onChange={e => setCourseData({ ...courseData, tools: e.target.value.split(",").map(s => s.trim()).filter(Boolean) })}
                         placeholder="e.g. VS Code, Chrome DevTools"
-                        className="w-full px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-[#EDEDED] outline-none text-sm"
+                        className="w-full px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-border-hover outline-none text-sm"
                       />
                     </div>
 
@@ -800,7 +800,7 @@ export function CourseCreatorWorkspace({ onClose, onSave, onDelete, initialData,
                             type="number"
                             value={courseData.price}
                             onChange={e => setCourseData({ ...courseData, price: Number(e.target.value) })}
-                            className="w-full px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-[#EDEDED] focus:border-[#EDEDED] transition-all outline-none font-medium text-text-primary"
+                            className="w-full px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-border-hover focus:border-border-hover transition-all outline-none font-medium text-text-primary"
                           />
                           <p className="text-xs font-medium text-text-secondary mt-2">Set to 0 to make the course free.</p>
                         </div>
@@ -810,7 +810,7 @@ export function CourseCreatorWorkspace({ onClose, onSave, onDelete, initialData,
                           <select
                             value={courseData.visibility || 'public'}
                             onChange={e => setCourseData({ ...courseData, visibility: e.target.value as 'public' | 'unlisted' | 'private' })}
-                            className="w-full px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-[#EDEDED] focus:border-[#EDEDED] transition-all outline-none font-medium text-text-primary"
+                            className="w-full px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-border-hover focus:border-border-hover transition-all outline-none font-medium text-text-primary"
                           >
                             <option value="public">Public (Marketplace)</option>
                             <option value="unlisted">Unlisted (Link Only)</option>
@@ -832,7 +832,7 @@ export function CourseCreatorWorkspace({ onClose, onSave, onDelete, initialData,
                           <select
                             value={courseData.uiStyle || 'standard'}
                             onChange={e => setCourseData({ ...courseData, uiStyle: e.target.value as 'standard' | 'progression-map' })}
-                            className="w-full px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-[#EDEDED] focus:border-[#EDEDED] transition-all outline-none font-medium text-text-primary"
+                            className="w-full px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-border-hover focus:border-border-hover transition-all outline-none font-medium text-text-primary"
                           >
                             <option value="standard">Standard List</option>
                             <option value="progression-map">Progression Map / Level Map</option>
@@ -845,7 +845,7 @@ export function CourseCreatorWorkspace({ onClose, onSave, onDelete, initialData,
                           <select
                             value={courseData.language || 'English'}
                             onChange={e => setCourseData({ ...courseData, language: e.target.value })}
-                            className="w-full px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-[#EDEDED] focus:border-[#EDEDED] transition-all outline-none font-medium text-text-primary"
+                            className="w-full px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-border-hover focus:border-border-hover transition-all outline-none font-medium text-text-primary"
                           >
                             <option value="English">English</option>
                             <option value="Spanish">Spanish</option>
@@ -868,7 +868,7 @@ export function CourseCreatorWorkspace({ onClose, onSave, onDelete, initialData,
                               value={courseData.estimatedTime || ""}
                               onChange={e => setCourseData({ ...courseData, estimatedTime: e.target.value })}
                               placeholder="e.g. 4 hours 30 mins"
-                              className="w-full px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-[#EDEDED] focus:border-[#EDEDED] transition-all outline-none font-medium text-text-primary"
+                              className="w-full px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-border-hover focus:border-border-hover transition-all outline-none font-medium text-text-primary"
                             />
                           </div>
                           <div>
@@ -878,7 +878,7 @@ export function CourseCreatorWorkspace({ onClose, onSave, onDelete, initialData,
                               onChange={e => setCourseData({ ...courseData, welcomeMessage: e.target.value })}
                               placeholder="Message shown to students when they enroll..."
                               rows={3}
-                              className="w-full px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-[#EDEDED] focus:border-[#EDEDED] transition-all outline-none font-medium text-text-primary resize-y"
+                              className="w-full px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-border-hover focus:border-border-hover transition-all outline-none font-medium text-text-primary resize-y"
                             />
                           </div>
                           <div>
@@ -888,7 +888,7 @@ export function CourseCreatorWorkspace({ onClose, onSave, onDelete, initialData,
                               onChange={e => setCourseData({ ...courseData, congratulationsMessage: e.target.value })}
                               placeholder="Message shown to students when they complete the course..."
                               rows={3}
-                              className="w-full px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-[#EDEDED] focus:border-[#EDEDED] transition-all outline-none font-medium text-text-primary resize-y"
+                              className="w-full px-4 py-3 bg-bg-primary border border-border-secondary rounded-md focus:ring-1 focus:ring-border-hover focus:border-border-hover transition-all outline-none font-medium text-text-primary resize-y"
                             />
                           </div>
                         </div>

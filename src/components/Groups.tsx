@@ -319,7 +319,7 @@ export function Groups() {
                 </span>
                 <button 
                   onClick={() => handleCopyCode(selectedGroup.inviteCode)}
-                  className="px-4 py-2 bg-bg-tertiary hover:bg-[#333] text-text-primary rounded-md text-sm font-medium transition-colors flex items-center gap-2 border border-border-secondary"
+                  className="px-4 py-2 bg-bg-tertiary hover:bg-bg-tertiary/80 text-text-primary rounded-md text-sm font-medium transition-colors flex items-center gap-2 border border-border-secondary"
                 >
                   Code: {selectedGroup.inviteCode}
                   {copiedId === selectedGroup.inviteCode ? <Check className="w-5 h-5 text-text-primary" /> : <Copy className="w-5 h-5" />}
@@ -496,7 +496,7 @@ export function Groups() {
                 <span className={`px-3 py-1.5 rounded-md text-xs font-medium flex items-center gap-1 border ${
                   group.isPrivate 
                     ? 'bg-bg-tertiary text-text-secondary border-border-secondary' 
-                    : 'bg-bg-inverted text-text-inverted border-[#EDEDED]'
+                    : 'bg-bg-inverted text-text-inverted border-border-secondary'
                 }`}>
                   {group.isPrivate ? <Shield className="w-3 h-3" /> : <Users className="w-3 h-3" />}
                   {group.isPrivate ? 'Private' : 'Public'}
@@ -518,16 +518,16 @@ export function Groups() {
                     key={i}
                     src={member.avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=${member.avatarSeed || member.userId}`}
                     alt="Member" 
-                    className="w-10 h-10 rounded-full border border-[#111] bg-bg-tertiary object-cover"
+                    className="w-10 h-10 rounded-full border border-border-primary bg-bg-tertiary object-cover"
                   />
                 ))}
                 {(group.members?.length || 0) > 3 && (
-                  <div className="w-10 h-10 rounded-full border border-[#111] bg-bg-tertiary flex items-center justify-center text-xs font-medium text-text-primary">
+                  <div className="w-10 h-10 rounded-full border border-border-primary bg-bg-tertiary flex items-center justify-center text-xs font-medium text-text-primary">
                     +{(group.members?.length || 0) - 3}
                   </div>
                 )}
               </div>
-              <div className="w-10 h-10 rounded-full bg-bg-tertiary flex items-center justify-center group-hover:bg-[#333] transition-colors">
+              <div className="w-10 h-10 rounded-full bg-bg-tertiary flex items-center justify-center group-hover:bg-bg-tertiary/80 transition-colors">
                 <ChevronRight className="w-6 h-6 text-text-secondary group-hover:text-text-primary transition-colors" />
               </div>
             </div>
@@ -571,7 +571,7 @@ export function Groups() {
                     type="text"
                     value={groupName}
                     onChange={(e) => setGroupName(e.target.value)}
-                    className="w-full px-5 py-4 rounded-md border border-border-secondary focus:outline-none focus:border-[#EDEDED] transition-colors bg-bg-primary text-text-primary text-lg font-medium"
+                    className="w-full px-5 py-4 rounded-md border border-border-secondary focus:outline-none focus:border-border-hover transition-colors bg-bg-primary text-text-primary text-lg font-medium"
                     placeholder="e.g., React Masters"
                     required
                   />
@@ -581,7 +581,7 @@ export function Groups() {
                   <textarea
                     value={groupDesc}
                     onChange={(e) => setGroupDesc(e.target.value)}
-                    className="w-full px-5 py-4 rounded-md border border-border-secondary focus:outline-none focus:border-[#EDEDED] transition-colors bg-bg-primary text-text-primary min-h-[120px] text-lg font-medium resize-none"
+                    className="w-full px-5 py-4 rounded-md border border-border-secondary focus:outline-none focus:border-border-hover transition-colors bg-bg-primary text-text-primary min-h-[120px] text-lg font-medium resize-none"
                     placeholder="What's this group about?"
                     required
                   />
@@ -594,8 +594,8 @@ export function Groups() {
                       onClick={() => setIsPrivate(false)}
                       className={`flex-1 py-3 px-4 rounded-md border font-medium transition-all flex items-center justify-center gap-2 ${
                         !isPrivate 
-                          ? 'border-[#EDEDED] bg-bg-inverted text-text-inverted' 
-                          : 'border-border-secondary bg-bg-primary text-text-secondary hover:border-[#666]'
+                          ? 'border-border-hover bg-bg-inverted text-text-inverted' 
+                          : 'border-border-secondary bg-bg-primary text-text-secondary hover:border-border-hover'
                       }`}
                     >
                       <Users className="w-5 h-5" />
@@ -606,8 +606,8 @@ export function Groups() {
                       onClick={() => setIsPrivate(true)}
                       className={`flex-1 py-3 px-4 rounded-md border font-medium transition-all flex items-center justify-center gap-2 ${
                         isPrivate 
-                          ? 'border-[#EDEDED] bg-bg-inverted text-text-inverted' 
-                          : 'border-border-secondary bg-bg-primary text-text-secondary hover:border-[#666]'
+                          ? 'border-border-hover bg-bg-inverted text-text-inverted' 
+                          : 'border-border-secondary bg-bg-primary text-text-secondary hover:border-border-hover'
                       }`}
                     >
                       <Shield className="w-5 h-5" />
@@ -624,7 +624,7 @@ export function Groups() {
                   <button
                     type="button"
                     onClick={() => setShowCreateModal(false)}
-                    className="px-6 py-4 bg-bg-tertiary text-text-primary hover:bg-[#333] font-medium rounded-md transition-colors flex-1 text-lg border border-border-secondary"
+                    className="px-6 py-4 bg-bg-tertiary text-text-primary hover:bg-bg-tertiary/80 font-medium rounded-md transition-colors flex-1 text-lg border border-border-secondary"
                   >
                     Cancel
                   </button>
@@ -659,7 +659,7 @@ export function Groups() {
                     type="text"
                     value={inviteCode}
                     onChange={(e) => setInviteCode(e.target.value.toUpperCase())}
-                    className="w-full px-5 py-4 rounded-md border border-border-secondary focus:outline-none focus:border-[#EDEDED] transition-colors bg-bg-primary text-text-primary font-mono text-center text-2xl tracking-widest uppercase font-semibold"
+                    className="w-full px-5 py-4 rounded-md border border-border-secondary focus:outline-none focus:border-border-hover transition-colors bg-bg-primary text-text-primary font-mono text-center text-2xl tracking-widest uppercase font-semibold"
                     placeholder="ENTER CODE"
                     required
                   />
@@ -668,7 +668,7 @@ export function Groups() {
                   <button
                     type="button"
                     onClick={() => setShowJoinModal(false)}
-                    className="px-6 py-4 bg-bg-tertiary text-text-primary hover:bg-[#333] font-medium rounded-md transition-colors flex-1 text-lg border border-border-secondary"
+                    className="px-6 py-4 bg-bg-tertiary text-text-primary hover:bg-bg-tertiary/80 font-medium rounded-md transition-colors flex-1 text-lg border border-border-secondary"
                   >
                     Cancel
                   </button>

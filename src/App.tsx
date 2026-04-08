@@ -798,8 +798,8 @@ export default function App() {
                       className={cn(
                         "px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap transition-all border",
                         selectedCategory === cat 
-                          ? "bg-bg-inverted text-text-inverted border-[#EDEDED]" 
-                          : "bg-bg-tertiary text-text-primary hover:bg-[#333] border-border-secondary"
+                          ? "bg-bg-inverted text-text-inverted border-border-hover" 
+                          : "bg-bg-tertiary text-text-primary hover:bg-bg-secondary border-border-secondary"
                       )}
                     >
                       {cat}
@@ -813,7 +813,7 @@ export default function App() {
                     placeholder="Search courses... (/)"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full sm:w-72 pl-10 pr-4 py-2 bg-bg-tertiary border border-border-secondary rounded-md focus:outline-none focus:ring-1 focus:ring-[#555] focus:border-[#555] transition-all text-sm text-text-primary placeholder-text-muted"
+                    className="w-full sm:w-72 pl-10 pr-4 py-2 bg-bg-tertiary border border-border-secondary rounded-md focus:outline-none focus:ring-1 focus:ring-border-hover focus:border-border-hover transition-all text-sm text-text-primary placeholder-text-muted"
                   />
                   <div className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -907,7 +907,7 @@ export default function App() {
                 </div>
               ) : (
                 <div className="text-center py-20 bg-bg-secondary rounded-xl border border-border-primary border-dashed">
-                  <BookOpen className="w-12 h-12 text-[#444] mx-auto mb-4" />
+                  <BookOpen className="w-12 h-12 text-text-muted mx-auto mb-4" />
                   <h3 className="text-lg font-semibold text-text-primary">No courses found</h3>
                   <p className="text-text-secondary mt-2 text-sm">Try adjusting your search or filters.</p>
                 </div>

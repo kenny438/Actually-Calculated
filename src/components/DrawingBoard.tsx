@@ -199,10 +199,10 @@ export function DrawingBoard({ initialData, onChange, readOnly = false }: Drawin
   };
 
   return (
-    <div className="flex flex-col w-full h-full bg-bg-secondary rounded-xl border border-zinc-800/50 overflow-hidden">
+    <div className="flex flex-col w-full h-full bg-bg-secondary rounded-xl border border-border-primary overflow-hidden">
       {!readOnly && (
-        <div className="flex flex-wrap items-center gap-2 p-3 bg-zinc-900/80 border-b border-zinc-800/50">
-          <div className="flex bg-zinc-800/50 rounded-lg p-1">
+        <div className="flex flex-wrap items-center gap-2 p-3 bg-bg-secondary border-b border-border-primary">
+          <div className="flex bg-bg-tertiary rounded-lg p-1">
             <ToolButton icon={<MousePointer2 size={18} />} active={tool === 'select'} onClick={() => setTool('select')} title="Select" />
             <ToolButton icon={<Pen size={18} />} active={tool === 'pen'} onClick={() => setTool('pen')} title="Pen" />
             <ToolButton icon={<Eraser size={18} />} active={tool === 'eraser'} onClick={() => setTool('eraser')} title="Eraser" />
@@ -211,7 +211,7 @@ export function DrawingBoard({ initialData, onChange, readOnly = false }: Drawin
             <ToolButton icon={<Type size={18} />} active={tool === 'text'} onClick={() => setTool('text')} title="Text" />
           </div>
           
-          <div className="w-px h-6 bg-zinc-700/50 mx-1" />
+          <div className="w-px h-6 bg-border-secondary mx-1" />
           
           <div className="flex items-center gap-2">
             <input 
@@ -227,21 +227,21 @@ export function DrawingBoard({ initialData, onChange, readOnly = false }: Drawin
               max="20" 
               value={strokeWidth} 
               onChange={(e) => setStrokeWidth(parseInt(e.target.value))}
-              className="w-24 accent-indigo-500"
+              className="w-24 accent-bg-inverted"
               title="Stroke Width"
             />
           </div>
           
-          <div className="w-px h-6 bg-zinc-700/50 mx-1" />
+          <div className="w-px h-6 bg-border-secondary mx-1" />
           
           <div className="flex gap-1 ml-auto">
-            <button onClick={handleUndo} disabled={history.length === 0} className="p-2 text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg disabled:opacity-50 transition-colors" title="Undo">
+            <button onClick={handleUndo} disabled={history.length === 0} className="p-2 text-text-muted hover:text-text-primary hover:bg-bg-tertiary rounded-lg disabled:opacity-50 transition-colors" title="Undo">
               <Undo size={18} />
             </button>
-            <button onClick={handleClear} className="p-2 text-zinc-400 hover:text-red-400 hover:bg-zinc-800 rounded-lg transition-colors" title="Clear All">
+            <button onClick={handleClear} className="p-2 text-text-muted hover:text-rose-500 hover:bg-bg-tertiary rounded-lg transition-colors" title="Clear All">
               <Trash2 size={18} />
             </button>
-            <button onClick={handleExport} className="p-2 text-zinc-400 hover:text-indigo-400 hover:bg-zinc-800 rounded-lg transition-colors" title="Export PNG">
+            <button onClick={handleExport} className="p-2 text-text-muted hover:text-text-primary hover:bg-bg-tertiary rounded-lg transition-colors" title="Export PNG">
               <Download size={18} />
             </button>
           </div>
@@ -335,7 +335,7 @@ function ToolButton({ icon, active, onClick, title }: { icon: React.ReactNode, a
       title={title}
       className={cn(
         "p-2 rounded-md transition-colors",
-        active ? "bg-indigo-500/20 text-indigo-400" : "text-zinc-400 hover:text-zinc-100 hover:bg-zinc-700/50"
+        active ? "bg-bg-inverted text-text-inverted" : "text-text-muted hover:text-text-primary hover:bg-bg-secondary"
       )}
     >
       {icon}

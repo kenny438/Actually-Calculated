@@ -34,8 +34,8 @@ export function LessonPlayer({ lesson, onClose, onComplete }: LessonPlayerProps)
   
   if (!step) {
     return (
-      <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-6">
-        <h2 className="text-2xl font-bold text-slate-800 mb-4">This lesson is empty.</h2>
+      <div className="min-h-screen bg-bg-primary flex flex-col items-center justify-center p-6">
+        <h2 className="text-2xl font-bold text-text-primary mb-4">This lesson is empty.</h2>
         <button onClick={onComplete} className="px-8 py-3 bg-bg-inverted text-text-inverted rounded-xl font-bold hover:bg-bg-inverted-hover transition-colors">
           Complete Lesson
         </button>
@@ -156,7 +156,7 @@ export function LessonPlayer({ lesson, onClose, onComplete }: LessonPlayerProps)
                   )}
 
                   {lesson.content && (
-                    <div className="prose prose-invert max-w-none prose-headings:font-semibold prose-p:text-text-secondary prose-p:leading-relaxed bg-bg-secondary p-8 rounded-xl border border-border-primary shadow-sm">
+                    <div className="prose dark:prose-invert max-w-none prose-headings:font-semibold prose-p:text-text-secondary prose-p:leading-relaxed bg-bg-secondary p-8 rounded-xl border border-border-primary shadow-sm">
                       <Markdown
                         components={{
                           code: ({ inline, className, children, ...props }: any) => {
@@ -213,12 +213,12 @@ export function LessonPlayer({ lesson, onClose, onComplete }: LessonPlayerProps)
                   {lesson.tutorNotes && (
                     <div className="bg-bg-tertiary p-8 rounded-xl border border-border-secondary shadow-sm">
                       <h3 className="text-lg font-semibold text-text-primary mb-4 flex items-center gap-2">
-                        <div className="w-6 h-6 bg-[#333] text-text-primary rounded-md flex items-center justify-center border border-border-hover">
+                        <div className="w-6 h-6 bg-bg-inverted text-text-inverted rounded-md flex items-center justify-center border border-border-hover">
                           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
                         </div>
                         Tutor Notes
                       </h3>
-                      <div className="prose prose-invert max-w-none prose-p:text-text-secondary prose-headings:text-text-primary text-sm">
+                      <div className="prose dark:prose-invert max-w-none prose-p:text-text-secondary prose-headings:text-text-primary text-sm">
                         <Markdown>{lesson.tutorNotes}</Markdown>
                       </div>
                     </div>
@@ -239,7 +239,7 @@ export function LessonPlayer({ lesson, onClose, onComplete }: LessonPlayerProps)
                             rel="noopener noreferrer"
                             className="flex items-center justify-between p-4 bg-bg-primary rounded-lg border border-border-secondary hover:border-border-hover hover:bg-bg-secondary transition-all group"
                           >
-                            <span className="font-medium text-text-primary group-hover:text-white text-sm">{res.title}</span>
+                            <span className="font-medium text-text-primary group-hover:text-text-inverted text-sm">{res.title}</span>
                             <ArrowRight className="w-4 h-4 text-text-muted group-hover:text-text-primary group-hover:translate-x-1 transition-transform" />
                           </a>
                         ))}
@@ -466,7 +466,7 @@ export function LessonPlayer({ lesson, onClose, onComplete }: LessonPlayerProps)
                                 transition={{ duration: 1, ease: "easeOut" }}
                                 className={cn(
                                   "absolute inset-y-0 left-0 opacity-10",
-                                  isSelected ? "bg-bg-inverted" : "bg-[#666]"
+                                  isSelected ? "bg-bg-inverted" : "bg-bg-tertiary"
                                 )}
                               />
                             )}
@@ -499,8 +499,8 @@ export function LessonPlayer({ lesson, onClose, onComplete }: LessonPlayerProps)
       <div className={cn(
         "fixed bottom-0 left-0 right-0 border-t transition-colors duration-300",
         checkedState === 'idle' ? "bg-bg-secondary border-border-primary" :
-        checkedState === 'correct' ? "bg-emerald-900/20 border-emerald-900/50" :
-        "bg-red-900/20 border-red-900/50"
+        checkedState === 'correct' ? "bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-900/50" :
+        "bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-900/50"
       )}>
         <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex-1">
@@ -528,7 +528,7 @@ export function LessonPlayer({ lesson, onClose, onComplete }: LessonPlayerProps)
             className={cn(
               "px-8 py-3 rounded-lg font-medium text-sm transition-colors",
               checkedState === 'idle' 
-                ? "bg-bg-inverted hover:bg-bg-inverted-hover text-text-inverted disabled:bg-[#333] disabled:text-text-muted" 
+                ? "bg-bg-inverted hover:bg-bg-inverted-hover text-text-inverted disabled:bg-bg-tertiary disabled:text-text-muted" 
                 : checkedState === 'correct'
                   ? "bg-emerald-600 hover:bg-emerald-500 text-white"
                   : "bg-red-600 hover:bg-red-500 text-white"
